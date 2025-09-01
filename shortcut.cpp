@@ -1,4 +1,4 @@
-#include <windows.h>
+п»ї#include <windows.h>
 #include <shlobj.h>
 #include <objbase.h>
 #include <shobjidl.h>
@@ -12,49 +12,49 @@ int wmain(int argc, wchar_t* argv[])
     wchar_t lnkPath[MAX_PATH] = {0};
     int nSuccess = 0;
 
-    // Получаем путь к рабочему столу (Unicode версия)
+    // РџРѕР»СѓС‡Р°РµРј РїСѓС‚СЊ Рє СЂР°Р±РѕС‡РµРјСѓ СЃС‚РѕР»Сѓ (Unicode РІРµСЂСЃРёСЏ)
     if (FAILED(SHGetFolderPathW(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, desktopDir)))
     {
-        MessageBoxW(NULL, L"Не удалось получить путь к рабочему столу", L"Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ РїСѓС‚СЊ Рє СЂР°Р±РѕС‡РµРјСѓ СЃС‚РѕР»Сѓ", L"РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return 1;
     }
 
-    // Формируем полный путь ярлыка
+    // Р¤РѕСЂРјРёСЂСѓРµРј РїРѕР»РЅС‹Р№ РїСѓС‚СЊ СЏСЂР»С‹РєР°
     HRESULT hr = StringCchCatW(desktopDir, MAX_PATH, L"\\Far.lnk");
     if (FAILED(hr))
     {
-        MessageBoxW(NULL, L"Ошибка обработки пути ярлыка", L"Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РћС€РёР±РєР° РѕР±СЂР°Р±РѕС‚РєРё РїСѓС‚Рё СЏСЂР»С‹РєР°", L"РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return 1;
     }
 
-    // Получаем текущий каталог
+    // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РёР№ РєР°С‚Р°Р»РѕРі
     if (GetCurrentDirectoryW(MAX_PATH, currentDir) == 0)
     {
-        MessageBoxW(NULL, L"Не удалось получить текущий каталог", L"Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ С‚РµРєСѓС‰РёР№ РєР°С‚Р°Р»РѕРі", L"РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return 1;
     }
 
-    // Сохраняем рабочую директорию
+    // РЎРѕС…СЂР°РЅСЏРµРј СЂР°Р±РѕС‡СѓСЋ РґРёСЂРµРєС‚РѕСЂРёСЋ
     hr = StringCchCopyW(workingDir, MAX_PATH, currentDir);
     if (FAILED(hr))
     {
-        MessageBoxW(NULL, L"Ошибка обработки рабочего каталога", L"Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РћС€РёР±РєР° РѕР±СЂР°Р±РѕС‚РєРё СЂР°Р±РѕС‡РµРіРѕ РєР°С‚Р°Р»РѕРіР°", L"РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return 1;
     }
 
-    // Формируем полный путь к исполняемому файлу Far.exe
+    // Р¤РѕСЂРјРёСЂСѓРµРј РїРѕР»РЅС‹Р№ РїСѓС‚СЊ Рє РёСЃРїРѕР»РЅСЏРµРјРѕРјСѓ С„Р°Р№Р»Сѓ Far.exe
     hr = StringCchCatW(currentDir, MAX_PATH, L"\\Far.exe");
     if (FAILED(hr))
     {
-        MessageBoxW(NULL, L"Ошибка формирования пути к Far.exe", L"Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РћС€РёР±РєР° С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РїСѓС‚Рё Рє Far.exe", L"РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return 1;
     }
 
-    // Инициализация COM библиотеки
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ COM Р±РёР±Р»РёРѕС‚РµРєРё
     hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
     if (FAILED(hr))
     {
-        MessageBoxW(NULL, L"Не удалось инициализировать COM", L"Ошибка", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РќРµ СѓРґР°Р»РѕСЃСЊ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ COM", L"РћС€РёР±РєР°", MB_OK | MB_ICONERROR);
         return 1;
     }
 
@@ -136,7 +136,7 @@ int wmain(int argc, wchar_t* argv[])
 
     if (!nSuccess)
     {
-        MessageBoxW(NULL, L"Не удалось создать ярлык!", L"Ошибка!", MB_OK | MB_ICONERROR);
+        MessageBoxW(NULL, L"РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ СЏСЂР»С‹Рє!", L"РћС€РёР±РєР°!", MB_OK | MB_ICONERROR);
         return 1;
     }
 
